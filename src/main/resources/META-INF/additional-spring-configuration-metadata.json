@@ -1,0 +1,27 @@
+{"properties": [
+  {
+    "name": "home.welcome",
+    "type": "java.lang.String",
+    "description": "A description for 'home.welcome'"
+  },
+  {
+    "name": "me.welcome",
+    "type": "java.lang.String",
+    "description": "A description for 'me.welcome'"
+  },
+  {
+    "name": "me.welcome",
+    "type": "java.lang.String",
+    "description": "A description for 'me.welcome'"
+  },
+  {
+    "name": "me.welcome",
+    "type": "java.lang.String",
+    "description": "A description for 'me.welcome'"
+  },
+  {
+    "name": "me.welcome",
+    "type": "java.lang.String",
+    "description": "A description for 'me.welcome'"
+  }
+]}

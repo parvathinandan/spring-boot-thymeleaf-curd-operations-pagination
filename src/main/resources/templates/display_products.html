@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function confirmDelete() {
+		return confirm("Are you sure,you want to delete?");
+	}
+</script>
+</head>
+<body>
+<div>
+	<h1 th:align="center"><a th:href="@{/new}" >Create Product</a></h1>
+	<h1>Current Page -1 :[[${currentPage}-1]] &nbsp;value3 : [[${value3}]]</h1>
+	<h1>Current Page -1 :[[${currentPage-1}]]</h1>
+	<h1>Current Page    : [[${currentPage}]]</h1>
+	<h1>TotalItems : [[${totalRows}]]</h1>
+	<h1>TotalPages : [[${totalPages}]]</h1>
+</div>
+	<table th:border="3" th:cellpadding="10" th:align="center">
+		<thead>
+			<tr>
+				<th>Product_Id</th>
+				<th>Product_Name</th>
+				<th>Brand</th>
+				<th>Country</th>
+				<th>Price</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="product : ${productsList}">
+				<td th:text="${product.id}" th:required="true"> Product_Id</td>
+				<td th:text="${product.name}"> Product_Name</td>
+				<td th:text="${product.brand}"> Brand</td>
+				<td th:text="${product.madein}">Country</td>
+				<td th:text="${product.price}"> price</td>
+				<td>
+					<a th:href="@{'/edit/'+${product.id}}" class="btn btn-primary">Edit</a>
+					<a th:href="@{'/delete/'+${product.id}}" onclick="return confirmDelete()" class="btn btn-danger">Delete</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<h1 th:align="center" style="color: green;">
+		
+		TotalItems : [[${totalRows}]] &nbsp;&nbsp;&nbsp;Page&nbsp;[[${currentPage}]]&nbsp;of&nbsp;[[${totalPages}]]&nbsp;&nbsp;
+		<span>
+			<a th:if="${currentPage> 1}" th:href="@{/page/1}">FirstPage</a>
+			<span th:unless="${currentPage}>1">FirstPage</span>&nbsp;&nbsp;
+		</span>
+	
+		<span>
+			<a th:if="${currentPage> 1}" th:href="@{/page/{pageNumber}/{myNumber}(pageNumber=${currentPage-1},myNumber=${currentPage}) }">Previous</a>
+			<span th:unless="${currentPage}>1">Previous</span>&nbsp;&nbsp;
+		</span>
+		
+		<span th:each="i : ${#numbers.sequence(1,totalPages)}">
+				<a  th:if="${i != currentPage}" th:href="@{'/page/'+${i}}">[[${i}]]</a>
+				<span th:unless="${i != currentPage}">[[${i}]]</span>
+		</span>&nbsp;
+		<span>
+				<a th:if="${currentPage} < ${totalPages}" th:href="@{/page/{pageNumber}(pageNumber=${currentPage+1})}">Nextpage</a>
+				<span th:unless="${currentPage} < ${totalPages}">NextPage</span>
+		</span>&nbsp;
+		<span>
+			<a th:if="${totalPages}>${currentPage}" th:href="@{/page/{pageNumber}(pageNumber=${totalPages})}">LastPage</a>
+			<span th:unless="${totalPages}>${currentPage}">LastPage</span>
+		</span>
+	</h1>
+</body>
+</html>
